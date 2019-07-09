@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>map和forEach</title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+/*
+* Array.map()方法
+* 功能  :  创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。。
+* 参数  :  （currentValue，index，arrOrigin）(当前元素的值，当前元素的索引，当前元素的数组对象)
+* 官方使用
+* var arr = [1,2,3];
+* arr.map((currentVaLue,index,arrOrigin)=>{},this)
+* 
+*特别注意：
+*		1.map()不会对空数组进行检测，所以最好在使用map()之前进行检测是否为数组
+*		2.map()正常情况下不会改变原始数组,但是可以通过arrOrigin来修改
+*		3.map()可以有返回值，需要return
+*		4.map()中传入Math等数学元素,返回的数组中会被处理成想要的样子.如:xxx.map(Math.sqrt)  ===>可以将数组中的内容开平方.
+*		4.map()中传入Number等转换格式的方法,返回的数组也会被转换.如:xxx.map(Number)  ===>里面的元素都会被转化为数字类型
+*/
+//举个好的栗子
+let arrMap1=[1,2,3];
+// let arrMap1=""; //用于检验
+let arrMap2=Array.isArray(arrMap1)?arrMap1:[] 
+let newArrMap=arrMap2.map((item,index,arrOrigin) => {
+	return item*2;
+})
+// console.log(arrMap1)//没有改变。。。
+// console.log(arrMap2)//没有改变。。。
+// console.log(newArrMap)
+
+
+/*
+* Array.forEach()方法
+* 功能  :  遍历，对数组中的元素依次处理。
+* 参数  :  （currentValue，index，arrOrigin）(当前元素的值，当前元素的索引，当前元素的数组对象)
+* 官方使用
+* var arr = [1,2,3];
+* arr.forEach((currentVaLue,index,arr)=>{},this)
+* 
+*特别注意：
+*		1.forEach()不会对空数组进行检测，所以最好在使用forEach()之前进行检测是否为数组
+*		2.forEach()正常情况下不会直接改变原始数组,但是可以通过arrOrigin来修改
+*		
+*/
+// 举个好的栗子
+let arrForEach1=[1,2,3];
+// let arrForEach1=""; //用于检验
+let arrForEach2=Array.isArray(arrForEach1)?arrForEach1:[] 
+arrForEach2.forEach((item,index,arrOrigin) => {
+	arrOrigin[index]=item*2;
+})
+
+//写一个用forEach来累加参数的累加方法
+function Counter(arr){
+	this.sum=0;
+	this.count=0;
+}
+Counter.prototype.add=function(arr){
+	if (!Array.isArray(arr)){
+		console.warn('请传入数组')
+		return
+	} 
+	arr.forEach(function (element){
+		// console.log(this)
+		this.sum+=element;
+		++this.count;
+	},this)
+}
+let obj=new Counter();
+obj.add([1,2,3])
+// let ADD=obj.add; //检验this
+// ADD([1,2,3]);
+// console.log(obj);
+// console.log(obj.sum);
+
+//换一个优雅的写法
+class calssCounter{
+	constructor(){
+		this.sum=0;
+		this.count=0;
+	}
+	add(arr){
+		if(!Array.isArray(arr)){
+			console.warn('请输入数组');
+			return
+		}
+		arr.forEach(function(ele){
+			this.sum+=ele;
+			++this.count;
+		},this)
+	}
+}
+let objClass = new calssCounter();
+objClass.add([1,2,3,4,5]);
+console.log(objClass.sum)
+</script>
+</html>

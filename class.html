@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>class</title>
+</head>
+<body>
+	
+</body>
+<script>
+	//class的基本用法
+	// 起初的类是由构造函数演变而来，就比如下面的例子
+	function Point(x,y){
+		this.x=x;
+		this.y=y;
+	}
+	Point.prototype.toString=function(){
+		return "("+this.x+","+this.y+")";
+	}
+	var p=new Point(2,3);
+	// console.log(p.toString())
+	//but,这样每次写，一些新猿老是看不懂，就比如me。。。。。。
+	//所以ES6就提供了更加接近传统的面向对象语言（eg：C++ and Java）的写法,引入了class的概念.
+	//同样的功能，摇身一变成了这副德性：
+	class PointClass{
+		constructor(x,y){
+			this.x=x;
+			this.y=y;
+		}
+		toString(){
+			return "("+this.x+","+this.y+")";
+		}
+	}
+	//提一下，constructor函数等同于ES5的构造函数，this关键字则代表实例对象。
+	// 类的使用和构造函数的一致
+	var b=new PointClass(2,4);
+	// console.log(b.toString())
+
+	//类的静态方法
+	//名词解释:类相当于实例的原型,所有在类中定义的方法,都会被实例继承.但是如果在方法前加上static关键字,
+	//方法就不会被实例继承.而是直接通过类来调用方法,这就叫静态方法.qaq~不懂得还是去了解下什么叫实例,原型,构造函数吧...
+	//举个栗子:
+	class Foo{
+		static classMethod(){
+			return 'hello';
+		}
+	}
+	var F=Foo.classMethod();
+	// console.log(F);
+	// console.log(F.classMethod());//这个会报错哟。。。为什么捏？
+	//类的静态方法中的this
+	class F1{
+		static bar(){
+			this.zed();
+		}
+		static zed(){
+			console.log('hello')
+		}
+		zed(){
+			console.log('world')
+		}
+	}
+	// console.log(F1.bar())//
+	//以上内容可以表明，静态方法的this指的是类，而不是实例。
+
+	//父类的静态方法，可以被子类继承
+	class FFO{
+		static classMethod(){
+			return 'hello hcf';
+		}
+	}
+	class BBr extends FFO{
+
+	}
+	console.log(BBr.classMethod())
+</script>
+</html>
