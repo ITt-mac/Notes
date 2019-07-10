@@ -85,27 +85,81 @@
 	// }
 	//类的继承，继承了所有的属性和方法（包括静态方法）
 	class PointFather {
-		text(){
+		text() {
 			console.log('测试')
 		}
 	}
 	class PointChild extends PointFather {
-		constructor(x,y,color){
+		constructor(x, y, color) {
 			//这里需要注意，子类必须在constructor方法中调用super方法，否则新建实例的时候回报错。
 			//因为子类自己的this对象，必须通过父类的构造函数完成塑造,
 			//得到与父类同样的实例属性和方法，然后在其基础上加上自己的实例属性和方法。
 			//如果不调用super方法，子类就得不到this对象
-			super(x,y); //调用父类的constructor(x,y)
-			this.color=color;
+			super(x, y); //调用父类的constructor(x,y)
+			this.color = color;
 		}
-		toString(){
+		toString() {
 			return this.color + '' + super.toString(); //调用父类的toString() 
 		}
 	}
 	let cp = new PointChild();//如果没有super(),会报错
 
 	//判断一个类是否继承了另外一个类的方法 Object.getPrototypeOf()
-	console.log(Object.getPrototypeOf(PointChild)==PointFather)  //true
+	// console.log(Object.getPrototypeOf(PointChild)==PointFather)  //true
+
+	//super关键字
+	//既可以当函数使用，又可以当对象使用。
+	//第一种情况：
+	//super作为函数时调用，代表父类的构造函数。ES6的要求，子类的构造函数必须执行一次super，（用于生成子类的this等）
+	class A {
+
+	}
+	class B extends A {
+		constructor() {
+			//注意，super虽然达标了父类的A的构造函数，但是返回的子类B的实例，即super内部的this
+			//指的是B的实例，因此super()在这里相当于
+			//A.prototype.constructor.call(this)
+			super();
+		}
+	}
+
+	//第二种情况：
+	//super作为对象使用。在普通方法中，指向父类的原型对象；在静态方法中，指向父类。
+	class AA {
+		p() {
+			return 2;
+		}
+	}
+	class BB extends AA {
+		constructor() {
+			super();
+			console.log(super.p());
+		}
+	}
+	// let BBobj=new BB();
+
+
+	//子类调用父类的方法时，该方法内部的this指向问题；
+	class fatherThis {
+		constructor() {
+			this.x = 1;
+		}
+		print() {
+			console.log(this.x);
+		}
+	}
+	class childThis extends fatherThis {
+		constructor() {
+			super();
+			this.x = 2;
+		}
+		m() {
+			super.print();
+		}
+	}
+	let whoThis = new childThis();
+	whoThis.m();
+	//实际上执行的是super.print.call(this),因为fatherThis.prototype.print()内部的this指向子类的实例。
 </script>
 
 </html>
