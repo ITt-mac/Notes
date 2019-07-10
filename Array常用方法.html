@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组常用方法练习</title>
+</head>
+<body>
+    
+</body>
+<script>
+/*
+* Array.isArray(obj)方法
+* 功能  :  判断一个传递的值是否是一个Array
+* 参数  :  obj 为需要检查的值
+* 举些栗子：
+*/
+    // 下面的函数调用都返回 true
+    Array.isArray([]);
+    Array.isArray([1]);
+    Array.isArray(new Array());
+    // 鲜为人知的事实：其实 Array.prototype 也是一个数组。
+    Array.isArray(Array.prototype); 
+
+    // 下面的函数调用都返回 false
+    Array.isArray();
+    Array.isArray({});
+    Array.isArray(null);
+    Array.isArray(undefined);
+
+// --------------------------------------我是分割线，哟~~~~ man!------------------------------------------------------
+
+
+
+</script>
+</html>
