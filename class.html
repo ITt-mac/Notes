@@ -1,62 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>class</title>
 </head>
+
 <body>
-	
+
 </body>
 <script>
-	//class的基本用法
+	//1.class的基本用法
 	// 起初的类是由构造函数演变而来，就比如下面的例子
-	function Point(x,y){
-		this.x=x;
-		this.y=y;
+	function Point(x, y) {
+		this.x = x;
+		this.y = y;
 	}
-	Point.prototype.toString=function(){
-		return "("+this.x+","+this.y+")";
+	Point.prototype.toString = function () {
+		return "(" + this.x + "," + this.y + ")";
 	}
-	var p=new Point(2,3);
+	var p = new Point(2, 3);
 	// console.log(p.toString())
 	//but,这样每次写，一些新猿老是看不懂，就比如me。。。。。。
 	//所以ES6就提供了更加接近传统的面向对象语言（eg：C++ and Java）的写法,引入了class的概念.
 	//同样的功能，摇身一变成了这副德性：
-	class PointClass{
-		constructor(x,y){
-			this.x=x;
-			this.y=y;
+	class PointClass {
+		constructor(x, y) {
+			this.x = x;
+			this.y = y;
 		}
-		toString(){
-			return "("+this.x+","+this.y+")";
+		toString() {
+			return "(" + this.x + "," + this.y + ")";
 		}
 	}
 	//提一下，constructor函数等同于ES5的构造函数，this关键字则代表实例对象。
 	// 类的使用和构造函数的一致
-	var b=new PointClass(2,4);
+	var b = new PointClass(2, 4);
 	// console.log(b.toString())
 
-	//类的静态方法
+	//2.类的静态方法
 	//名词解释:类相当于实例的原型,所有在类中定义的方法,都会被实例继承.但是如果在方法前加上static关键字,
 	//方法就不会被实例继承.而是直接通过类来调用方法,这就叫静态方法.qaq~不懂得还是去了解下什么叫实例,原型,构造函数吧...
 	//举个栗子:
-	class Foo{
-		static classMethod(){
+	class Foo {
+		static classMethod() {
 			return 'hello';
 		}
 	}
-	var F=Foo.classMethod();
+	var F = Foo.classMethod();
 	// console.log(F);
 	// console.log(F.classMethod());//这个会报错哟。。。为什么捏？
 	//类的静态方法中的this
-	class F1{
-		static bar(){
+	class F1 {
+		static bar() {
 			this.zed();
 		}
-		static zed(){
+		static zed() {
 			console.log('hello')
 		}
-		zed(){
+		zed() {
 			console.log('world')
 		}
 	}
@@ -64,14 +66,46 @@
 	//以上内容可以表明，静态方法的this指的是类，而不是实例。
 
 	//父类的静态方法，可以被子类继承
-	class FFO{
-		static classMethod(){
+	class FFO {
+		static classMethod() {
 			return 'hello hcf';
 		}
 	}
-	class BBr extends FFO{
+	class BBr extends FFO {
 
 	}
-	console.log(BBr.classMethod())
+	// console.log(BBr.classMethod())
+
+	// 3.类的继承
+	// class PointFather {
+
+	// }
+	// class PointChild extends PointFather {
+
+	// }
+	//类的继承，继承了所有的属性和方法（包括静态方法）
+	class PointFather {
+		text(){
+			console.log('测试')
+		}
+	}
+	class PointChild extends PointFather {
+		constructor(x,y,color){
+			//这里需要注意，子类必须在constructor方法中调用super方法，否则新建实例的时候回报错。
+			//因为子类自己的this对象，必须通过父类的构造函数完成塑造,
+			//得到与父类同样的实例属性和方法，然后在其基础上加上自己的实例属性和方法。
+			//如果不调用super方法，子类就得不到this对象
+			super(x,y); //调用父类的constructor(x,y)
+			this.color=color;
+		}
+		toString(){
+			return this.color + '' + super.toString(); //调用父类的toString() 
+		}
+	}
+	let cp = new PointChild();//如果没有super(),会报错
+
+	//判断一个类是否继承了另外一个类的方法 Object.getPrototypeOf()
+	console.log(Object.getPrototypeOf(PointChild)==PointFather)  //true
 </script>
+
 </html>
