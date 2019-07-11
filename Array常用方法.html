@@ -11,7 +11,7 @@
 </body>
 <script>
 /*
-* Array.isArray(obj)方法
+* Array.isArray(obj) 方法
 * 功能  :  判断一个传递的值是否是一个Array
 * 参数  :  obj 为需要检查的值
 * 举些栗子：
@@ -31,7 +31,23 @@
 
 // --------------------------------------我是分割线，哟~~~~ man!------------------------------------------------------
 
+/*
+* Array.prototype.concat() 方法
+* 功能  :  方法用于合并两个或者多个数值，此方法不会改变现有数组，而是返回一个新的数组。
+* 语法  :  var new_array=old_array.concat(value,...valueN)
+* 参数  :  valueN | 可选，将 数组 | 值 连接起来组成新的数组。
+* 举些栗子：
+*/
+var arr_concat_1 =[1,2,3];
+var arr_concat_2 =[9,8,7];
+var backArr=arr_concat_1.concat(arr_concat_2);
+// console.log(backArr);
+arr_concat_1[0]='qq';//这里改了arr_concat_1的内容，但是backArr竟然没变，为什么捏？？？
+// console.log(arr_concat_1);
+// console.log(backArr);
 
-
+var concat_string="wohenshuai";
+var new_array=arr_concat_1.concat(concat_string);
+console.log(new_array)
 </script>
 </html>
