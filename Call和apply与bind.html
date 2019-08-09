@@ -13,6 +13,38 @@
 
 </body>
 <script>
+    //类数组借用Array的方法，实现添加类数组内容
+    var arrayLike={
+        0:"q",
+        1:"w",
+        2:"e",
+        length:3
+    }
+    Array.prototype.push.apply(arrayLike,['r']);
+    console.log(arrayLike);
     
+    //父类
+    function supFather(name){
+        this.name=name;
+        this.colors=['red','blue','green'];//复杂类型
+    }
+    supFather.prototype.sayName=function(age){
+        console.log(this.name,'age');
+    }
+    //子类
+    function sub(name,age){
+        //借用父类的方法，修改他的this指向，赋值父类的构造函数里面的方法和属性到子类上
+        supFather.call(this,name);
+        this.age=age;
+    }
+    //重写子类的prototype,修正constructor指向
+    function inheritPrototype(sonFn,fatherFn){
+        sonFn.prototype=Object.create(fatherFn.prototype);//继承父类的属性以及方法
+        sonFn.prototype.constructor=sonFn;//修正constructor指向到继承的那个函数上
+    }
+    inheritPrototype(sub,supFather);
+    sub.prototype.sayAge=function(){
+        console.log(this.age,'foo');
+    }
 </script>
 </html>
