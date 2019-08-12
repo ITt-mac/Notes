@@ -21,7 +21,7 @@
         length:3
     }
     Array.prototype.push.apply(arrayLike,['r']);
-    console.log(arrayLike);
+    // console.log(arrayLike);
     
     //父类
     function supFather(name){
@@ -37,14 +37,17 @@
         supFather.call(this,name);
         this.age=age;
     }
-    //重写子类的prototype,修正constructor指向
-    function inheritPrototype(sonFn,fatherFn){
-        sonFn.prototype=Object.create(fatherFn.prototype);//继承父类的属性以及方法
-        sonFn.prototype.constructor=sonFn;//修正constructor指向到继承的那个函数上
-    }
-    inheritPrototype(sub,supFather);
-    sub.prototype.sayAge=function(){
-        console.log(this.age,'foo');
-    }
+    var instance1=new sub('小红',24);
+    console.log(instance1)
+    console.log(instance1)
+    // //重写子类的prototype,修正constructor指向
+    // function inheritPrototype(sonFn,fatherFn){
+    //     sonFn.prototype=Object.create(fatherFn.prototype);//继承父类的属性以及方法
+    //     sonFn.prototype.constructor=sonFn;//修正constructor指向到继承的那个函数上
+    // }
+    // inheritPrototype(sub,supFather);
+    // sub.prototype.sayAge=function(){
+    //     console.log(this.age,'foo');
+    // }
 </script>
 </html>
