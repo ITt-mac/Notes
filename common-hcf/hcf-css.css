@@ -6,7 +6,7 @@
  * 
  */
 
- /*清楚浮动*/
+ /*清除浮动*/
 .clearfix {
     *zoom:1
 }
@@ -19,6 +19,12 @@
     clear: both
 }
 
+.keep-one-line{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
 /*多行文字，只保留两行并加省略号*/
 .keep-two-lines{
 	overflow: hidden;
@@ -27,3 +33,4 @@
     -webkit-line-clamp:2;
     -webkit-box-orient: vertical;
 }
+/*在设置字体或者文字居中的时候使用到的vertical-align:middle;是相对于子元素设置，对父元素无效果。。。。*/

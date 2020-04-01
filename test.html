@@ -5,6 +5,59 @@
 	<title>Document</title>
 </head>
 <body>
-	<input type="file"/>
+	<input type="Number" max="99" min='1'>
 </body>
+<script>
+	// MY.event=(function(){
+		// var aaa=function(){};
+		// var bbb=function(param){};
+		// var ccc=function(){};
+		// return {
+		// 	AAA:aaa,
+		// 	BBB:ccc(bbb)
+		// }
+	// })();
+	// 上面那种形式是用一个只执行函数，包含变量和方法，最后返回一些方法或变量，这样的好处是变量和函数都模块化。
+
+	// MY.obj={
+		
+	// }
+	// var a=[1,2,3]
+	// console.log(String(a))
+
+	// var target={};
+	// var p=new Proxy(target,{});
+	// p.a=123;
+	// console.log(target)
+
+	let validator = {
+	  set: function(obj, prop, value) {
+	    if (prop === 'age') {
+	      if (!Number.isInteger(value)) {
+	        throw new TypeError('The age is not an integer');
+	      }
+	      if (value > 200) {
+	        throw new RangeError('The age seems invalid');
+	      }
+	    }
+
+	    // The default behavior to store the value
+	    obj[prop] = value;
+
+	    // 表示成功
+	    return true;
+	  }
+	};
+
+	let person = new Proxy({}, validator);
+	// person.age = 100;
+
+
+	// person.age = 'young'; 
+	// 抛出异常: Uncaught TypeError: The age is not an integer
+
+	person.age = 300; 
+	// 抛出异常: Uncaught RangeError: The age seems invalid
+	// console.log(person.age); 
+</script>
 </html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖(deboundce)和节流(throttle) 总结</title>
+    <style>
+        #content {
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            color: #fff;
+            background-color: #ccc;
+            font-size: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content"></div>
+</body>
+<script>
+    // 序言：
+    // 我们在平时开发的时候，会有很多场景会频繁触发事件，
+    // 比如说搜索框实时发请求，onmousemove, resize, onscroll等等，
+    // 有些时候，我们并不能或者不想频繁触发事件，
+    // 咋办呢？这时候就应该用到函数防抖和函数节流了！
+
+    // 以下例子是在灰色鼠标内移动，持续触发count()函数
+    let num = 1;
+    let content = document.getElementById('content');
+    function count() {
+        content.innerHTML = num++;
+    };
+    // content.onmousemove = count;
+
+
+    //函数防抖(deboundce) 定义：短时间内多次触发同一事件，只执行最后一次，或者只执行最开始的一次，中间不执行。
+
+    //非立即执行版
+    function waitDeboundce(func, waitTime) {
+        let timer;
+        return function () {
+            let content = this;
+            let args = arguments;
+
+            if (timer) clearTimeout(timer);
+
+            timer = setTimeout(() => {
+                func.apply(this, args)
+            }, waitTime)
+        }
+    }
+    // content.onmousemove = waitDeboundce(count,1000);
+
+    //立即执行版
+    function immediateDeboundce(func, waitTime) {
+        let timer;
+        return function () {
+            let content = this;
+            let args = arguments;
+
+            if (timer) clearTimeout(timer);
+
+            let callNow = !timer;
+
+            timer = setTimeout(() => {
+                timer = null;
+            }, waitTime);
+            console.log(timer) //这个时候的timer是等于1，当前面的定时器没有启动之前，callNow都是等于flase，故下面的判断不会执行
+            if (callNow) func.apply(content, args);
+        }
+    }
+    // content.onmousemove = immediateDeboundce(count,5000);
+
+    // 合成版
+    /**
+     * @desc 函数防抖
+     * @param func 目标函数
+     * @param waitTime 延迟执行毫秒数
+     * @param immediate true - 立即执行， false - 延迟执行
+     */
+
+    function deboundce(func, waitTime, immediate) {
+        let timer;
+        return function () {
+            let content = this;
+            let args = arguments;
+
+            if (timer) clearTimeout(timer);
+            if (immediate) {
+                let callNow = !timer;
+                timer = setTimeout(() => {
+                    timer = null;
+                }, waitTime);
+                if (callNow) func.apply(content, args);
+            } else {
+                timer = setTimeout(() => {
+                    func.apply(this, args)
+                }, waitTime)
+            }
+        }
+    }
+    content.onmousemove = deboundce(count, 1000, false);
+</script>
+
+</html>
