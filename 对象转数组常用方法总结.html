@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象转数组方法总结</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //序言：
+    //对于像这样的一个对象，把它转换成一个数组，我们在开发中应该会遇到过，
+    //{'未完成':0, '已完成':1, '待确认':2, '已取消':-1}
+    // 转为
+    //[{"未完成":0},{"已完成":1},{"待确认":2},{"已取消":-1}]
+    //我们首先想到的是把他们一个个循环遍历取出来，push到一个数组当中去
+
+    let obj1={'未完成':0, '已完成':1, '待确认':2, '已取消':-1};
+    let arr1=[];
+
+    // for(let i in obj1){
+    //     let _obj={};
+    //     _obj[i]=obj1[i]
+    //     arr1.push(_obj);
+    //     //等价于 arr1.push({[i]:obj1[i]});
+    // }
+    Array.prototype.slice.call(obj1)
+    // console.log(arr1)
+
+    //栗子二
+    var toArray = function (Ob) {
+            try {
+                console.log(Ob)
+                return Array.prototype.slice.call(Ob);
+            } catch (e) {
+                console.log(s)
+                var arr = [];
+                for (var i = 0, len = s.length; i < len; i++) {
+                    arr[i] = s[i];
+                }
+                return arr;
+            }
+        }
+    let object1 = {
+        '0': 3,
+        '1': 13,
+        '2': 23,
+        '3': 33,
+        'length': 5,
+        'name': 330
+    }
+    // console.log(toArray(object1))
+
+    //栗子三
+    // 扩展运算符（…）
+    //1.arguments对象的转换
+    function foo() {
+        var args = [...arguments];
+    }
+
+    // 2.NodeList对象的转换
+    // [...document.querySelectorAll('p')]
+
+    //栗子四 Object.values(obj)方法，简单快捷
+    let object4 = {
+    '0': 3,
+    '1': 13,
+    '2': 23,
+    '3': 33
+    };
+    
+    let array4 = Object.values(object4) // [3, 13, 23, 33]
+    let array41 = Object.keys(object4);//['0','1','2','3']
+</script>
+</html>
