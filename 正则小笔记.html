@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天才第一步，正则纸尿布。。。。</title>
+</head>
+
+<body>
+   
+    <textarea name="" id="example" cols="30" rows="10">
+        1.猛龙摆尾，
+        2.巨龙撞击，
+        3.天崩地裂
+    </textarea>
+</body>
+<script>
+    // 换行符与\n互转
+    var exampleString = 'qwe<br/>1231<br/>';
+    // 转化为空格
+    var exampleChange = exampleString.replace(/<br\/>/g," ");
+    console.log(exampleChange)
+
+    var exampleString2 = 'qwe1231<br/>';
+    // 转化为换行符
+    var exampleString2=document.getElementById('example').value;
+    var exampleChange2 = exampleString2.replace(/\n/g,"<br/>");
+    console.log(exampleChange2)
+
+
+
+    //去除空格 
+    String.prototype.Trim = function () {
+        return this.replace(/\s+/g, "");
+    }
+
+    //去除换行 
+    function ClearBr(key) {
+        key = key.replace(/<\/?.+?>/g, "");
+        key = key.replace(/[\r\n]/g, "");
+        return key;
+    }
+
+    //去除左侧空格 
+    function LTrim(str) {
+        return str.replace(/^\s*/g, "");
+    }
+
+    //去右空格 
+    function RTrim(str) {
+        return str.replace(/\s*$/g, "");
+    }
+
+    //去掉字符串两端的空格 
+    function trim(str) {
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+    }
+
+    //去除字符串中间空格 
+    function CTim(str) {
+        return str.replace(/\s/g, '');
+    }
+</script>
+
+</html>
