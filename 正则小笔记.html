@@ -25,9 +25,15 @@
     var exampleString2 = 'qwe1231<br/>';
     // 转化为换行符
     var exampleString2=document.getElementById('example').value;
-    var exampleChange2 = exampleString2.replace(/\n/g,"<br/>");
+    var exampleChange2 = exampleString2.replace(/\r\n/g,"<br/>");   // \r是回车，\n是换行
     console.log(exampleChange2)
 
+    //Tips:
+    //有些markdown转化空格和回车的时候，需要加入样式调整展示
+    //css保留空格和换行符
+    //white-space: pre-wrap;
+    // css保留换行符
+    //white-space: pre-line;
 
 
     //去除空格 
