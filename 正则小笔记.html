@@ -8,12 +8,12 @@
 </head>
 
 <body>
-   
     <textarea name="" id="example" cols="30" rows="10">
         1.猛龙摆尾，
         2.巨龙撞击，
         3.天崩地裂
     </textarea>
+    <input type="file" id='fileId'>
 </body>
 <script>
     // 换行符与\n互转
@@ -67,6 +67,11 @@
     function CTim(str) {
         return str.replace(/\s/g, '');
     }
+
+    // 匹配后缀结尾的内容
+    // eg:匹配jpg，png，log等后缀结尾的文件
+    var reg=/\.(jpg|png|log)/;
+
 </script>
 
 </html>
