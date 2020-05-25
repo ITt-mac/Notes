@@ -1,0 +1,27 @@
+/* 状态颜色 */
+.globalStatusGray {
+  color: #999;
+}
+.globalStatusGreen {
+  color: #20bb00;
+}
+.globalStatusRed {
+  color: #ff0000;
+}
+.globalStatusOrange {
+  color: #ff6a00;
+}
+.globalStatusBlue {
+  color: #1861f2;
+}
+
+// 修改antd筛选重置、确认位置
+:global{
+  .ant-table-filter-dropdown-link.clear{
+    float: left !important;
+  }
+  .ant-table-filter-dropdown-link.confirm{
+    float: right !important;
+  }
+}
+
