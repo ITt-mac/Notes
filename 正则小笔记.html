@@ -19,13 +19,13 @@
     // 换行符与\n互转
     var exampleString = 'qwe<br/>1231<br/>';
     // 转化为空格
-    var exampleChange = exampleString.replace(/<br\/>/g," ");
+    var exampleChange = exampleString.replace(/<br\/>/g, " ");
     console.log(exampleChange)
 
     var exampleString2 = 'qwe1231<br/>';
     // 转化为换行符
-    var exampleString2=document.getElementById('example').value;
-    var exampleChange2 = exampleString2.replace(/\r\n/g,"<br/>");   // \r是回车，\n是换行
+    var exampleString2 = document.getElementById('example').value;
+    var exampleChange2 = exampleString2.replace(/\r\n/g, "<br/>"); // \r是回车，\n是换行
     console.log(exampleChange2)
 
     //Tips:
@@ -37,7 +37,7 @@
 
 
     //去除空格 
-    String.prototype.Trim = function () {
+    String.prototype.Trim = function() {
         return this.replace(/\s+/g, "");
     }
 
@@ -70,20 +70,20 @@
 
     // 匹配后缀结尾的内容
     // eg:匹配jpg，png，log等后缀结尾的文件
-    var reg=/\.(jpg|png|log)/;
+    var reg = /\.(jpg|png|log)/;
 
     //匹配银行卡
-    var regBank=/^([0-9]{1})\d{5,50}$/;  //括号代表分组，前面部分是0到9的数字出现一次，后面的部分0到9出现5至50位。
+    var regBank = /^([0-9]{1})\d{5,50}$/; //括号代表分组，前面部分是0到9的数字出现一次，后面的部分0到9出现5至50位。
     //^是开头，$是结尾，{n}==出现一次，{n,m}==出现n至m次，[0-9] == \d 代表数字0到9
 
     //匹配四个字符后加空格--可用于银行卡，身份证展示
-    var banString='1111222233334444'
-    var regComfortablyString=banString.replace(/\D/g,'').replace(/(....)(?=.)/g,'$1 ');
+    var banString = '1111222233334444';
+    var regComfortablyString = banString.replace(/\D/g, '').replace(/(....)(?=.)/g, '$1 ');
     console.log(regComfortablyString) //1111 2222 3333 4444
-    // 解析：前面的replace是替换掉非数字内容（\D是匹配非数字，\d匹配是数字），
-    //       后面一个replace里两个括号分两组，第一个分组里的四个.代表是任意字符，
-    //       第二个分组中的问号代表一个字符或者没有字符，?等于任意字符，replace的第二个参数$1
-    //       代表分组1，就是前面(....)分组匹配的内容，在后面加空格。也就是$2 $3就是分组二 三的意思。
+        // 解析：前面的replace是替换掉非数字内容（\D是匹配非数字，\d匹配是数字），
+        //       后面一个replace里两个括号分两组，第一个分组里的四个.代表是任意字符，
+        //       第二个分组中的问号代表一个字符或者没有字符，?等于任意字符，replace的第二个参数$1
+        //       代表分组1，就是前面(....)分组匹配的内容，在后面加空格。也就是$2 $3就是分组二 三的意思。
 </script>
 
 </html>
