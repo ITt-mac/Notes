@@ -6,7 +6,7 @@
     "@babel/polyfill": "^7.0.0",
     "ant-design-pro": "^2.1.0",
     "antd": "^3.9.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "codemirror": "^5.41.0",
     "d3-shape": "^1.2.2",
